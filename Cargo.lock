@@ -1702,7 +1702,7 @@ checksum = "42012b0f064e01aa58b545fe3727f90f7dd4020f4a3ea735b50344965f5a57e9"
 
 [[package]]
 name = "gen_vrf"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alloy",
  "clap",
