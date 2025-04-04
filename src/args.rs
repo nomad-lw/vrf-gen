@@ -1,7 +1,6 @@
 use clap::Parser;
-
-const DEFAULT_RPC_URL: &str = "ws://localhost:8545";
-const DEFAULT_CONTRACT_ADDRESS: &str = "0xYourContractAddressHere";
+pub const DEFAULT_RPC_URL: &str = "https://sanko-arb-sepolia.rpc.caldera.xyz/http";
+pub const DEFAULT_CONTRACT_ADDRESS: &str = "0xa8DdcA8A7b53a2E38679E46A62ca81a79395b945";
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]

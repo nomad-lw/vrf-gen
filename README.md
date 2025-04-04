@@ -85,27 +85,20 @@ Options:
 #### Examples
 
 ##### Generate a VRF Proof
-
 ```bash
 gen_vrf --operation prove --message <hex_message> [--force-key-gen] [--silent] [--soft] [--json <suffix>]
-```
 
-Example:
-```bash
+# Example:
 gen_vrf --operation prove --message 0x1234 --json _test
 ```
 
 ##### Verify a VRF Proof
-
 ```bash
 gen_vrf --operation verify --message <hex_message> --pi <hex_encoded_proof> [--force-key-gen] [--silent]
-```
 
-Example:
-```bash
+# Example:
 gen_vrf --operation verify --message 0x1234 --pi 0xabcd...
 ```
-
 
 ##### On-chain Listener
 

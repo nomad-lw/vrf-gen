@@ -1,8 +1,8 @@
-// src/lib.rs
 pub mod blockchain;
 pub mod cli;
 pub mod error;
 pub mod vrf;
+pub mod args;
 
 // Use the correct bindings
-pub use iwyrd_bindings::wyrd as iwyrd_bindings;
+pub use contract_bindings::wyrd as bindings;

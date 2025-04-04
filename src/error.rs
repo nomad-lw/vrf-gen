@@ -1,4 +1,4 @@
-use eyre::{Result, eyre, WrapErr};
+use eyre::{Result, eyre};
 use thiserror::Error;
 
 #[derive(Error, Debug)]

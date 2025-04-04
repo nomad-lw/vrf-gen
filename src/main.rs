@@ -6,7 +6,7 @@ mod args;
 use args::Args;
 
 use gen_vrf::{
-    blockchain::listen_to_blockchain_events,
+    blockchain::{listen_to_blockchain_events,ListenerConfig},
     cli::{generate_vrf_proof, verify_vrf_proof},
     error::{setup_error_handling, wrap_input_err, wrap_vrf_err, wrap_blockchain_err},
 };
@@ -66,12 +66,17 @@ async fn main() -> Result<()> {
             }
         }
         "listen" => {
-            listen_to_blockchain_events(
-                &args.rpc_url,
-                &args.contract_address,
-                args.force_key_gen,
-                args.silent,
-            )
+            let config = ListenerConfig::new(
+                Some(args.rpc_url.clone()),
+                Some(args.contract_address.clone()),
+                None,
+                None,
+                Some(args.force_key_gen),
+                Some(args.silent),
+                None
+            );
+
+            listen_to_blockchain_events(config)
             .await
             .map_err(|e| wrap_blockchain_err(e, "Blockchain listener failed"))?;
         }

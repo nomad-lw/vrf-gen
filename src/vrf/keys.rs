@@ -7,6 +7,7 @@ use std::fs::File;
 use std::io::Write;
 
 const SECRET_KEY_ENV: &str = "VRF_SECRET_KEY";
+const PROVER_EOA_PRIVATE_KEY: &str = "VRF_PROVER_PRIVATE_KEY";
 
 pub fn generate_secret_key() -> Result<[u8; 32]> {
     println!("Generating a new secret key...");
@@ -39,4 +40,10 @@ pub fn get_secret_key(force: bool, silent: bool) -> Result<[u8; 32]> {
     } else {
         generate_secret_key()
     }
+}
+
+pub fn get_prover_private_key() -> Result<String> {
+    dotenv().ok();
+    env::var(PROVER_EOA_PRIVATE_KEY)
+        .map_err(|_| eyre!("Prover private key not found in environment"))
 }

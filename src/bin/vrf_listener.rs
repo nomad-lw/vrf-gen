@@ -1,18 +1,19 @@
 use clap::Parser;
 use eyre::Result;
 use tracing::info;
-use gen_vrf::blockchain::listen_to_blockchain_events;
+use gen_vrf::blockchain::{listen_to_blockchain_events, ListenerConfig};
 use gen_vrf::error::setup_error_handling;
+use gen_vrf::args::{DEFAULT_RPC_URL, DEFAULT_CONTRACT_ADDRESS};
 
 #[derive(Parser, Debug)]
 #[command(version, about = "Listen for VRF randomness requests", long_about = None)]
 struct Args {
     /// Ethereum RPC URL
-    #[arg(long, default_value = "http://localhost:8545")]
+    #[arg(long, default_value = DEFAULT_RPC_URL)]
     rpc_url: String,
 
     /// Contract address to listen to
-    #[arg(long)]
+    #[arg(long, default_value = DEFAULT_CONTRACT_ADDRESS)]
     contract_address: String,
 
     /// Force generation of a new secret key
@@ -22,6 +23,10 @@ struct Args {
     /// Silent mode
     #[arg(short, long)]
     silent: bool,
+
+    /// Start listening from latest block minus this value (0 means start from latest)
+    #[arg(long)]
+    start_block_delta: Option<u64>,
 }
 
 #[tokio::main]
@@ -35,10 +40,15 @@ async fn main() -> Result<()> {
     }
 
     listen_to_blockchain_events(
-        &args.rpc_url,
-        &args.contract_address,
-        args.force_key_gen,
-        args.silent,
+        ListenerConfig::new(
+            Some(args.rpc_url.clone()),
+            Some(args.contract_address.clone()),
+            None,
+            None,
+            Some(args.force_key_gen),
+            Some(args.silent),
+            args.start_block_delta,
+        )
     )
     .await
 }
