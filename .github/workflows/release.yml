@@ -1,0 +1,29 @@
+name: Release Build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: x86_64-unknown-linux-gnu
+      - run: cargo build --release
+      - run: strip target/release/gen_vrf
+      - run: strip target/release/vrf_listener
+      - name: Generate checksums
+        run: |
+          sha256sum target/release/gen_vrf > SHA256SUMS.txt
+          sha256sum target/release/vrf_listener >> SHA256SUMS.txt
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/release/gen_vrf
+            target/release/vrf_listener
+            SHA256SUMS.txt
