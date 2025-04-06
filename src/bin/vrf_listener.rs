@@ -1,9 +1,11 @@
 use clap::Parser;
 use eyre::Result;
 use tracing::info;
-use gen_vrf::blockchain::{listen_to_blockchain_events, ListenerConfig};
-use gen_vrf::error::setup_error_handling;
-use gen_vrf::args::{DEFAULT_RPC_URL, DEFAULT_CONTRACT_ADDRESS};
+use vrf_genkit::{
+    args::{DEFAULT_CONTRACT_ADDRESS, DEFAULT_RPC_URL},
+    blockchain::{listen_to_blockchain_events, ListenerConfig},
+    error::setup_error_handling,
+};
 
 #[derive(Parser, Debug)]
 #[command(version, about = "Listen for VRF randomness requests", long_about = None)]
@@ -39,16 +41,14 @@ async fn main() -> Result<()> {
         info!("Starting VRF listener...");
     }
 
-    listen_to_blockchain_events(
-        ListenerConfig::new(
-            Some(args.rpc_url.clone()),
-            Some(args.contract_address.clone()),
-            None,
-            None,
-            Some(args.force_key_gen),
-            Some(args.silent),
-            args.start_block_delta,
-        )
-    )
+    listen_to_blockchain_events(ListenerConfig::new(
+        Some(args.rpc_url.clone()),
+        Some(args.contract_address.clone()),
+        None,
+        None,
+        Some(args.force_key_gen),
+        Some(args.silent),
+        args.start_block_delta,
+    ))
     .await
 }

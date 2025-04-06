@@ -1,10 +1,18 @@
 [package]
-name = "gen_vrf"
+name = "vrf-genkit"
 version = "0.2.0"
 edition = "2021"
+keywords = ["vrf", "ecvrf", "secp256k1", "p256"]
+
+[[bin]]
+name = "gen_vrf"
+path = "src/main.rs"
+
+[[bin]]
+name = "vrf_listener"
+path = "src/bin/vrf_listener.rs"
 
 [dependencies]
-# alloy = { version = "0.12", features = ["full"] }
 alloy = { git = "https://github.com/alloy-rs/alloy", features = [
     "providers",
     "node-bindings",

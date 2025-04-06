@@ -1,0 +1,4 @@
+services:
+  vrf_listener:
+    env_file: .env  # Load variables at runtime
+    build: .

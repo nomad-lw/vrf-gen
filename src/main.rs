@@ -5,7 +5,7 @@ use tracing::{info, error};
 mod args;
 use args::Args;
 
-use gen_vrf::{
+use vrf_genkit::{
     blockchain::{listen_to_blockchain_events,ListenerConfig},
     cli::{generate_vrf_proof, verify_vrf_proof},
     error::{setup_error_handling, wrap_input_err, wrap_vrf_err, wrap_blockchain_err},

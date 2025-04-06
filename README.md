@@ -1,4 +1,4 @@
-# vrf-gen
+# VRF GenKit
 
 A standalone VRF (Verifiable Random Function) Prover accessible locally through CLI or as an autonomous on-chain prover.
 
