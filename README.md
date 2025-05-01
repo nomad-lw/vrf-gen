@@ -205,5 +205,13 @@ contract VRFTest is Test {
 
 ## License
 
-See [LICENSE.md](LICENSE.md) for details.
+See [LICENSE](LICENSE) for details.\
 Licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) (AGPL-3.0)
+
+
+Copyright (c) 2025 sambot.
+
+## Contact
+For license compliance or contributions:
+- GitHub: [@nomad-lw](https://github.com/nomad-lw)
+- Email: [0xsambot@protonmail.com]
